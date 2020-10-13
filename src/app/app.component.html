@@ -31,7 +31,44 @@
     </ul>
   </div>
 </nav>
-<div class="container py-5">
+<!--Search Content-->
+<div class="container py-3">
+  <div class="row">
+    <div class="col-lg-12 ">
+      <div class="card ">
+        <div class="card-header bg-primary text-white">
+          Seraching......
+        </div>
+        <div class="card-body">
+          <!-- <h5 class="card-title">Title</h5>
+          <p class="card-text">Content</p> -->
+          <div class="form-group">
+            <label for="">Select Date</label>
+            <div class="row">
+              <!-- <div class="col-xs-12 col-12 col-md-4 form-group">
+                <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker>
+              </div> -->
+              <div class="input-group col-xs-12 col-12 col-md-4 form-group">
+                <input type="text" placeholder="Datepicker" [(ngModel)]="searchDate" #ref="ngModel" id="date" class="form-control" bsDatepicker placeholder="Recipient's username"
+                  aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append hide" >
+                  <button class="btn btn-outline-danger" (click)="clearSearchDate()" type="button">X</button>
+                </div>
+              </div>
+            </div>
+            <small id="helpId" class="text-muted">Select any one date...</small>
+          </div>
+        </div>
+        <div class="card-footer bg-transparent border-0 d-flex justify-content-end">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!---Main Content-->
+<div class="container py-5" *ngIf="searchDate!=null && searchDate!='' ">
   <div class="py-3">
     <div class="card shadow-lg border-dark" style="border-radius: 20px;">
       <div class="d-flex justify-content-between card-header bg-primary text-white" style="border-radius: 20px;">

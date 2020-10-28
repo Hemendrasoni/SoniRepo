@@ -1,0 +1,94 @@
+<!--Search Content-->
+<div class="container">
+    <div class="row">
+      <div class="col-lg-12 ">
+        <div class="card ">
+          <div class="card-header bg-primary text-white">
+            Seraching......
+          </div>
+          <div class="card-body">
+            <!-- <h5 class="card-title">Title</h5>
+            <p class="card-text">Content</p> -->
+            <div class="form-group">
+              <label for="">Select Date</label>
+              <div class="row">
+                <!-- <div class="col-xs-12 col-12 col-md-4 form-group">
+                  <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker>
+                </div> -->
+                <div class="input-group col-xs-12 col-12 col-md-4 form-group">
+                  <input type="text" placeholder="Datepicker" [(ngModel)]="searchDate"
+                    (ngModelChange)="triggerData($event)" #ref="ngModel" id="date" class="form-control" bsDatepicker
+                    placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  
+                </div>
+              </div>
+              <small id="helpId" class="text-muted">Select any one date...</small>
+            </div>
+          </div>
+          <div class="card-footer bg-transparent border-0 d-flex justify-content-end">
+            <button class="btn btn-primary mr-3" type="button">Search</button>
+            <a [routerLink]="[ '/booking' ]" class="btn btn-primary mr-3" routerLinkActive="active">Book</a>
+            <button class="btn btn-warning" type="button" (click)="clearSearchDate()">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!---Main Content-->
+  <div class="container py-2">
+    <div class="py-3" *ngFor="let data of searchedData">
+      <div class="card shadow-lg " >
+        <div class="d-flex justify-content-between card-header bg-primary text-white" >
+          <span>
+            D.O.B: {{data.DOB | date}}
+          </span>
+          <span>
+            <p class="god_text">
+              " जय माता दी "</p>
+          </span>
+          <span>Booking Id: <b>{{data.booking_Id}}</b>
+          </span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title ">{{data.venue}}</h5>
+          <p class="card-text">~ {{data.location}}</p>
+          <hr style="border: 1px solid red;">
+          <div>
+            <p><b>Items:</b>{{data.items}}</p>
+            <section class="d-flex justify-content-between">
+              <span><b>Contact Number:</b> {{data.contact_no}}</span>
+              <span><b>Customer Name:</b> {{data.customer_name}}</span>
+            </section>
+          </div>
+          <hr style="border: 1px solid red;">
+          <div class="row">
+            <div class="col-lg-6">
+              <span><b>Note: </b>{{data.note}}</span>
+            </div>
+            <div class="col-lg-6">
+              <section class="d-flex align-items-end flex-column ">
+                <p><b>Ammount:</b> {{numConvert(data.billing_amt) | number}}/-</p>
+                <p><b>Advance:</b> {{numConvert(data.advance) | number}}/-</p>
+                <p><b>Remaining:</b> {{numConvert(data.remaining) | number}}/-</p>
+              </section>
+            </div>
+          </div>
+  
+          <hr style="border: 1px solid red;">
+          <a href="#" class="btn btn-primary float-right">Booking Details</a>
+        </div>
+      </div>
+    </div>
+    <div class="" *ngIf="searchedData.length==0">
+      <div class="jumbotron d-flex justify-content-center" style="border: 2px dashed;background-color: #f5f6f8;">
+        <h1 class="display-4 No_data_found">No Booking Found</h1>
+        <!-- <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </p> -->
+      </div>
+    </div>
+  </div>

@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './shared/modules/navbar/navbar.component';
 import { BookingComponent } from './feature/booking/booking.component';
 import { BookingSearchComponent } from './feature/booking/booking-search/booking-search.component';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { BookingSearchComponent } from './feature/booking/booking-search/booking
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
+    TypeaheadModule.forRoot(),
     BrowserModule,
     FormsModule,
     AppRoutingModule,

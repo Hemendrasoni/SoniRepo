@@ -5,7 +5,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterDataService } from './shared/services/register-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './shared/modules/navbar/navbar.component';
@@ -28,7 +28,8 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [RegisterDataService],
   bootstrap: [AppComponent]

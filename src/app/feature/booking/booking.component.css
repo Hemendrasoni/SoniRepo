@@ -4,3 +4,13 @@
     font-family: 'Pacifico', cursive;
     font-size: 30px;
 }
+
+.header,.footer
+{
+    background-color: #ff5821;
+}
+
+.text-primary
+{
+    color: #ff5821 !important;
+}

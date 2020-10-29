@@ -1,10 +1,10 @@
 <div class="container mb-5">
     <div class="card m-auto">
-        <div class="card-header bg-primary text-white brand_text_header">
+        <div class="card-header header text-white brand_text_header">
             Soni Brass Band Booking Form
         </div>
         <div class="card-body">
-            <form>
+            <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
                 <div class="row">
                     <div class="col-lg-4">
                         <h5 class="card-title text-primary">Customer Name</h5>
@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <input type="text" required class="form-control" name="customer_name"
+                            <input formControlName="customerName" type="text" [ngClass]="{ 'is-invalid': submitted && f.customerName.errors }" class="form-control" name="customer_name"
                                 placeholder="Customer Name">
                         </div>
                     </div>
@@ -27,9 +27,9 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="input-group col-xs-12 col-12 col-md-12 form-group">
-                                    <input type="text" placeholder="Datepicker" name="booking_date" class="form-control"
+                                    <input formControlName="bookingDate"  type="text" placeholder="Datepicker" name="booking_date" class="form-control"
                                         bsDatepicker placeholder="Booking Date" aria-label="Recipient's username"
-                                        aria-describedby="basic-addon2">
+                                        aria-describedby="basic-addon2" [ngClass]="{ 'is-invalid': submitted && f.bookingDate.errors }">
                                 </div>
                             </div>
                         </div>
@@ -42,12 +42,12 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">+91</span>
                             </div>
-                            <input type="text" class="form-control" [(ngModel)]="con_num" name="contacts"
+                            <input type="text" class="form-control" formControlName="contactNumber" name="contacts"
                                 placeholder="941XXXXXXX" aria-label="Recipient's username"
-                                aria-describedby="button-addon2">
+                                aria-describedby="button-addon2" [ngClass]="{ 'is-invalid': submitted && f.contactNumber.errors }">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-primary" type="button" (click)="addContact()"
-                                    id="button-addon2">+</button>
+                                <a class="btn btn-outline-primary" (click)="addContact()"
+                                    id="button-addon2" >+</a>
                             </div>
                         </div>
                         <div *ngFor="let item of contacts; let i=index">
@@ -71,15 +71,15 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="customer_name">From</label>
-                                    <timepicker name="from" id="time_from" [mousewheel]="allowMouseWheel"
-                                        [(ngModel)]="fromTime"></timepicker>
+                                    <timepicker formControlName="timeFrom" name="from" id="time_from" [mousewheel]="allowMouseWheel"
+                                    [ngClass]="{ 'is-invalid': submitted && f.timeFrom.errors }"></timepicker>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="customer_name">To</label>
-                                    <timepicker name="to" id="time_to" [mousewheel]="allowMouseWheel"
-                                        [(ngModel)]="toTime"></timepicker>
+                                    <timepicker formControlName="timeTo" name="to" id="time_to" [mousewheel]="allowMouseWheel"
+                                    [ngClass]="{ 'is-invalid': submitted && f.timeTo.errors }"></timepicker>
                                 </div>
                             </div>
 
@@ -88,8 +88,8 @@
                     <div class="col-lg-6" style="margin-top: 60px;">
                         <div class="input-group mb-3">
                             <!-- <input type="text" required class="form-control" name="members" placeholder="Members"> -->
-                            <input [(ngModel)]="selected" name="members" [typeahead]="states" [typeaheadMultipleSearch]="true"
-                                typeaheadMultipleSearchDelimiters=",|+" class="form-control" placeholder="Items">
+                            <input  name="members" formControlName="members" [typeahead]="states" [typeaheadMultipleSearch]="true"
+                                typeaheadMultipleSearchDelimiters=",|+" class="form-control" placeholder="Items" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.members.errors }">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-danger" type="button" 
                                         id="button-addon2">X</button>
@@ -110,14 +110,14 @@
 
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <textarea class="form-control" name="venue_address" rows="3"
-                                placeholder="Venue Address"></textarea>
+                            <textarea formControlName="venueAddress" class="form-control" name="venue_address" rows="3"
+                                placeholder="Venue Address" [ngClass]="{ 'is-invalid': submitted && f.venueAddress.errors }"></textarea>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <textarea class="form-control" name="hotel_address" placeholder="Hotel/Guest House Address"
-                                rows="3"></textarea>
+                            <textarea formControlName="hotelAddress" class="form-control" name="hotel_address" placeholder="Hotel/Guest House Address"
+                                rows="3" [ngClass]="{ 'is-invalid': submitted && f.hotelAddress.errors }"></textarea>
                         </div>
 
                     </div>
@@ -137,44 +137,45 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="billing_amnt"></label>
-                            <input type="text" required class="form-control" name="billing_amnt"
-                                placeholder="Billing Amount">
+                            <input type="text" required class="form-control" formControlName="bill_amnt" name="billing_amnt"
+                                placeholder="Billing Amount" [ngClass]="{ 'is-invalid': submitted && f.bill_amnt.errors }">
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="advance_amnt"></label>
-                            <input type="text" required class="form-control" name="advance_amnt" placeholder="Advance">
+                            <input type="text" required class="form-control" formControlName="adv_amnt"  name="advance_amnt" placeholder="Advance" [ngClass]="{ 'is-invalid': submitted && f.adv_amnt.errors }">
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="remaining_amnt"></label>
-                            <input type="text" required class="form-control" name="remaining_amnt"
-                                placeholder="Remaining Amount">
+                            <input type="text" required class="form-control" formControlName="remaining_amnt" name="remaining_amnt"
+                                placeholder="Remaining Amount" [ngClass]="{ 'is-invalid': submitted && f.remaining_amnt.errors }">
                         </div>
                     </div>
                 </div>
                 <h5 class="card-title text-primary mb-3">Local Address</h5>
                 <div class="form-group">
-                    <textarea class="form-control" name="local_address" rows="3" placeholder="Local Address"></textarea>
+                    <textarea class="form-control" formControlName="localAddress"  name="local_address" rows="3" placeholder="Local Address" [ngClass]="{ 'is-invalid': submitted && f.localAddress.errors }"></textarea>
                 </div>
-                <h5 class="card-title text-primary mb-3">Notes</h5>
+                <h5 class="card-title text-primary mb-3">Note</h5>
                 <div class="form-group">
-                    <textarea class="form-control" name="notes" rows="3" placeholder="Notes..."></textarea>
+                    <textarea class="form-control" formControlName="note"  name="notes" rows="3" placeholder="Notes..." [ngClass]="{ 'is-invalid': submitted && f.note.errors }"></textarea>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="float-right pt-3">
-                            <button type="submit" class="btn btn-primary px-5 mx-2">Submit</button>
-                            <button type="submit" class="btn btn-danger px-5 mx-2">Cancel</button>
+                            <button type="submit" class="btn btn-outline-primary px-5 mx-2">Submit</button>
+                            <button type="button" class="btn btn-outline-danger px-5 mx-2">Cancel</button>
+                            <button type="reset" class="btn btn-outline-warning px-5 mx-2" (click)="onReset()">Clear</button>
                         </div>
                     </div>
                 </div>
 
             </form>
         </div>
-        <div class="card-footer text-white bg-primary">
+        <div class="card-footer text-white footer">
             <section class="float-right"><strong><I>SONI BRASS BAND</I><sup><span>&#169;</span></sup></strong></section>
         </div>
     </div>

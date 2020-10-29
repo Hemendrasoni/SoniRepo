@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-12 ">
         <div class="card ">
-          <div class="card-header bg-primary text-white">
+          <div class="card-header header text-white">
             Seraching......
           </div>
           <div class="card-body">
@@ -16,7 +16,7 @@
                   <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker>
                 </div> -->
                 <div class="input-group col-xs-12 col-12 col-md-4 form-group">
-                  <input type="text" placeholder="Datepicker" [(ngModel)]="searchDate"
+                  <input type="text"  placeholder="Datepicker" [(ngModel)]="searchDate"
                     (ngModelChange)="triggerData($event)" #ref="ngModel" id="date" class="form-control" bsDatepicker
                     placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
   
@@ -26,9 +26,9 @@
             </div>
           </div>
           <div class="card-footer bg-transparent border-0 d-flex justify-content-end">
-            <button class="btn btn-primary mr-3" type="button">Search</button>
-            <a [routerLink]="[ '/booking' ]" class="btn btn-primary mr-3" routerLinkActive="active">Book</a>
-            <button class="btn btn-warning" type="button" (click)="clearSearchDate()">Clear</button>
+            <button class="btn btn-outline-primary mr-3" type="button">Search</button>
+            <a [routerLink]="[ '/booking' ]" class="btn btn-outline-success mr-3" routerLinkActive="active">Book</a>
+            <button class="btn btn-outline-warning" type="button" (click)="clearSearchDate()">Clear</button>
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
   <div class="container py-2">
     <div class="py-3" *ngFor="let data of searchedData">
       <div class="card one-edge-shadow" >
-        <div class="d-flex justify-content-between card-header bg-primary text-white" >
+        <div class="d-flex justify-content-between card-header header text-white" >
           <span>
             D.O.B: {{data.DOB | date}}
           </span>
@@ -53,7 +53,7 @@
         <div class="card-body">
           <h5 class="card-title ">{{data.venue}}</h5>
           <p class="card-text">~ {{data.location}}</p>
-          <hr style="border: 1px solid red;">
+          <hr style="border: 1px solid #ff5821;">
           <div>
             <p><b>Items:</b>{{data.items}}</p>
             <section class="d-flex justify-content-between">
@@ -61,7 +61,7 @@
               <span><b>Customer Name:</b> {{data.customer_name}}</span>
             </section>
           </div>
-          <hr style="border: 1px solid red;">
+          <hr style="border: 1px solid #ff5821;">
           <div class="row">
             <div class="col-lg-6">
               <span><b>Note: </b>{{data.note}}</span>
@@ -75,8 +75,8 @@
             </div>
           </div>
   
-          <hr style="border: 1px solid red;">
-          <a href="#" class="btn btn-primary float-right">Booking Details</a>
+          <hr style="border: 1px solid #ff5821;">
+          <a href="#" class="btn btn-outline-primary float-right">Booking Details</a>
         </div>
       </div>
     </div>

@@ -1,12 +1,18 @@
+import { CustomerModel } from './customer_model';
+
 export class RegisterEntity {
-    public id: number;
-    public DOB: Date;
-    public booking_Id: string;
-    public venue: string;
-    public location: string;
-    public items: string;
-    public contact_no: string;
-    public billing_amt: string;
-    public advance: string;
-    public remaining: string;
+       id: number;
+       DOB: Date;
+       timeFrom:string;
+       timeTo:string;
+       booking_Id: string;
+       venue: string;
+       location: string;
+       items: string;
+       notes:string;
+  
+       billing_amt: string;
+       advance: string;
+       remaining: string;
+       Customer:CustomerModel;
 }

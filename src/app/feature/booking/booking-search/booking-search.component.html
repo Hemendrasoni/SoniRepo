@@ -37,28 +37,28 @@
   
   <!---Main Content-->
   <div class="container py-2">
-    <div class="py-3" *ngFor="let data of searchedData">
+    <div class="py-3" *ngFor="let data of searchedData;let i=index">
       <div class="card one-edge-shadow" >
         <div class="d-flex justify-content-between card-header header text-white" >
           <span>
-            D.O.B: {{data.DOB | date}}
+            D.O.B: {{data.bookingDate | date}}
           </span>
           <span>
             <p class="god_text">
               " जय माता दी "</p>
           </span>
-          <span>Booking Id: <b>{{data.booking_Id}}</b>
+          <span>Booking Id: <b>{{data.id}}</b>
           </span>
         </div>
         <div class="card-body">
-          <h5 class="card-title ">{{data.venue}}</h5>
-          <p class="card-text">~ {{data.location}}</p>
+          <h5 class="card-title ">{{data.venueAddress}}</h5>
+          <p class="card-text">~ {{data.localAddress}}</p>
           <hr style="border: 1px solid #ff5821;">
           <div>
             <p><b>Items:</b>{{data.items}}</p>
             <section class="d-flex justify-content-between">
-              <span><b>Contact Number:</b> {{data.contact_no}}</span>
-              <span><b>Customer Name:</b> {{data.customer_name}}</span>
+              <span><b>Contact Number:</b> {{data.contactNumber[0]}}</span>
+              <span><b>Customer Name:</b> {{data.customerName}}</span>
             </section>
           </div>
           <hr style="border: 1px solid #ff5821;">
@@ -68,16 +68,16 @@
             </div>
             <div class="col-lg-6">
               <section class="d-flex align-items-end flex-column ">
-                <p><b>Ammount:</b> {{numConvert(data.billing_amt) | number}}/-</p>
-                <p><b>Advance:</b> {{numConvert(data.advance) | number}}/-</p>
-                <p><b>Remaining:</b> {{numConvert(data.remaining) | number}}/-</p>
+                <p><b>Ammount:</b> {{data.bill_amnt}}/-</p>
+                <p><b>Advance:</b> {{data.adv_amnt}}/-</p>
+                <p><b>Remaining:</b> {{data.remaining_amnt}}/-</p>
               </section>
             </div>
           </div>
   
           <hr style="border: 1px solid #ff5821;">
-          <a href="#" class="btn btn-outline-primary float-right ">Edit Booking</a>
-          <a href="#" class="btn btn-outline-primary float-right mr-2">Booking Details</a>
+          <span  (click)="editForm(data)" class="btn btn-outline-primary float-right ">Edit Booking</span>
+          <span  class="btn btn-outline-primary float-right mr-2">Booking Details</span>
         </div>
       </div>
     </div>

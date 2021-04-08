@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RegisterEntity } from 'src/app/shared/models/register-entity';
 import { RegisterDataService } from 'src/app/shared/services/register-data.service';
 
@@ -17,7 +18,7 @@ export class BookingSearchComponent implements OnInit {
   searchedData: RegisterEntity[] = [];
   pipe = new DatePipe('en-US')
 
-  constructor(private service: RegisterDataService) {
+  constructor(private service: RegisterDataService,public _router : Router) {
 
   }
 
@@ -33,16 +34,22 @@ export class BookingSearchComponent implements OnInit {
     this.searchedData = [];
   }
 
+  editForm(data:any)
+  {
+    // console.log(data)
+    this._router.navigate(['/booking'],{state:{captureData:data}})
+  }
+
   triggerData(event) {
     this.searchedData = [];
     const date = this.pipe.transform(event, 'dd/MM/yyyy')
     this.RegisterData.forEach((item) => {
-      let comDate = this.pipe.transform(item.DOB, 'dd/MM/yyyy');
+      let comDate = this.pipe.transform(item.bookingDate, 'dd/MM/yyyy');
       if (date === comDate) {
         this.searchedData.push(item);
       }
     })
-    console.log(date);
+    console.log(this.searchedData);
   }
   numConvert(num: string) {
     return Number(num);

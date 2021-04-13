@@ -41,9 +41,8 @@ export class BookingComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder, public route: ActivatedRoute, public _router: Router) {
-    this.editData = this._router.getCurrentNavigation().extras.state.captureData;
+    this.editData = this._router.getCurrentNavigation().extras.state?.captureData;
     console.log(this.editData)
-  
   }
 
   get f() { return this.bookingForm.controls; }
@@ -70,7 +69,6 @@ export class BookingComponent implements OnInit {
       this.bookingForm.patchValue({
         customerName: this.editData.customerName,
         bookingDate: new Date(this.editData.bookingDate),
-        // contactNumber: this.editData.contactNumber,
         timeFrom: this.editData.timeFrom,
         timeTo: this.editData.timeTo,
         items: this.editData.items,
@@ -82,7 +80,7 @@ export class BookingComponent implements OnInit {
         localAddress: this.editData.localAddress,
         note: this.editData.note,
       });
-      this.contacts=this.editData.contactNumber;
+      this.contacts = this.editData.contactNumber;
     }
     this.booking_obj = new RegisterEntity();
     this.customer_obj = new CustomerModel();

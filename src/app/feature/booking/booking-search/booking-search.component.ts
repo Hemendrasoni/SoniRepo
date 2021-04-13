@@ -12,13 +12,13 @@ import { RegisterDataService } from 'src/app/shared/services/register-data.servi
 export class BookingSearchComponent implements OnInit {
 
   date: Date = new Date();
-  searchDate: any;
+  searchDate: any=null;
   dataVisible: boolean = false;
   RegisterData: RegisterEntity[] = [];
   searchedData: RegisterEntity[] = [];
   pipe = new DatePipe('en-US')
 
-  constructor(private service: RegisterDataService,public _router : Router) {
+  constructor(private service: RegisterDataService, public _router: Router) {
 
   }
 
@@ -34,10 +34,8 @@ export class BookingSearchComponent implements OnInit {
     this.searchedData = [];
   }
 
-  editForm(data:any)
-  {
-    // console.log(data)
-    this._router.navigate(['/booking'],{state:{captureData:data}})
+  editForm(data: any) {
+    this._router.navigate(['/booking'], { state: { captureData: data } })
   }
 
   triggerData(event) {

@@ -1,9 +1,13 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContactModel } from 'src/app/shared/models/contact_model';
 import { CustomerModel } from 'src/app/shared/models/customer_model';
 import { RegisterEntity } from 'src/app/shared/models/register-entity';
+import { RegisterDataService } from 'src/app/shared/services/register-data.service';
+import * as moment from 'moment';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-booking',
@@ -20,7 +24,8 @@ export class BookingComponent implements OnInit {
   fromTime: Date = new Date();
   toTime: Date = new Date();
   allowMouseWheel = true;
-  contacts: any[] = [];
+  // contacts: any[] = [];
+  contact: ContactModel[] = [];
   editData: RegisterEntity = null;
   con_num: any;
   selected: string;
@@ -40,7 +45,7 @@ export class BookingComponent implements OnInit {
 
 
 
-  constructor(private formBuilder: FormBuilder, public route: ActivatedRoute, public _router: Router) {
+  constructor(private formBuilder: FormBuilder, public route: ActivatedRoute, public _router: Router, public _restCall: RegisterDataService, public notify: NotificationService) {
     this.editData = this._router.getCurrentNavigation().extras.state?.captureData;
     console.log(this.editData)
   }
@@ -51,7 +56,7 @@ export class BookingComponent implements OnInit {
       {
         customerName: ['', Validators.required],
         bookingDate: ['', Validators.required],
-        contactNumber: [null, Validators.required],
+        contact: [null, Validators.required],
         timeFrom: ['', Validators.required],
         timeTo: ['', Validators.required],
         items: ['', Validators.required],
@@ -69,8 +74,8 @@ export class BookingComponent implements OnInit {
       this.bookingForm.patchValue({
         customerName: this.editData.customerName,
         bookingDate: new Date(this.editData.bookingDate),
-        timeFrom: this.editData.timeFrom,
-        timeTo: this.editData.timeTo,
+        timeFrom: new Date(this.editData.timeFrom),
+        timeTo: new Date(this.editData.timeTo),
         items: this.editData.items,
         venueAddress: this.editData.venueAddress,
         hotelAddress: this.editData.hotelAddress,
@@ -80,7 +85,7 @@ export class BookingComponent implements OnInit {
         localAddress: this.editData.localAddress,
         note: this.editData.note,
       });
-      this.contacts = this.editData.contactNumber;
+      this.contact = this.editData.contact;
     }
     this.booking_obj = new RegisterEntity();
     this.customer_obj = new CustomerModel();
@@ -88,27 +93,31 @@ export class BookingComponent implements OnInit {
   }
 
   addContact() {
-    if (this.bookingForm.get('contactNumber').value && !this.contacts.includes(this.bookingForm.get('contactNumber').value)) {
-      this.contacts.push(this.bookingForm.get('contactNumber').value);
-      this.bookingForm.get('contactNumber').setValue('');
+    if (this.bookingForm.get('contact').value && !this.contact.includes(this.bookingForm.get('contact').value)) {
+      this.contact_obj.number = this.bookingForm.get('contact').value;
+      this.contact.push(this.contact_obj);
+      this.bookingForm.get('contact').setValue('');
     }
   }
   removeContact(index: number) {
-    this.contacts.splice(index, 1);
+    this.contact.splice(index, 1);
   }
   Objmapper() {
 
   }
 
-  onSubmit(bookingObj: any) {
-    // this.submitted = true;
-    // this.Objmapper();
-    // console.log(bookingObj.controls);
+  onSubmit() {
     this.bookingForm.patchValue({
-      contactNumber: this.contacts
+      contact: this.contact,
+      bookingDate: moment(new Date(this.bookingForm.get('bookingDate').value)).format("YYYY-MM-DD HH:mm:ss"),
+      timeFrom: moment(new Date(this.bookingForm.get('timeFrom').value)).format("YYYY-MM-DD HH:mm:ss"),
+      timeTo: moment(new Date(this.bookingForm.get('timeTo').value)).format("YYYY-MM-DD HH:mm:ss"),
     });
     console.log(this.bookingForm.value);
-    this.bookingForm.reset();
+    this._restCall.saveData(<RegisterEntity>this.bookingForm.value).subscribe((res) => {
+      this.notify.showSuccess("Data Saved Successfully!!", "Thanks for Booking!")
+    })
+    // this.bookingForm.reset();
   }
 
 

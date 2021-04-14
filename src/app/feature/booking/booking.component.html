@@ -45,7 +45,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">+91</span>
                             </div>
-                            <input type="text" class="form-control" formControlName="contactNumber" name="contacts"
+                            <input type="text" class="form-control" formControlName="contact" name="contacts"
                                 placeholder="941XXXXXXX" aria-label="Recipient's username"
                                 aria-describedby="button-addon2">
                             <div class="input-group-append">
@@ -53,8 +53,8 @@
                                     id="button-addon2" >+</a>
                             </div>
                         </div>
-                        <div *ngFor="let item of contacts; let i=index">
-                            <span class="badge badge-primary">{{item}} <span (click)="removeContact(i)"
+                        <div *ngFor="let item of contact; let i=index">
+                            <span class="badge badge-primary">{{item.number}} <span (click)="removeContact(i)"
                                     style="cursor: pointer;">X</span></span>
                         </div>
                     </div>

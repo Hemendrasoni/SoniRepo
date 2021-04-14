@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ContactModel } from 'src/app/shared/models/contact_model';
 import { RegisterEntity } from 'src/app/shared/models/register-entity';
 import { RegisterDataService } from 'src/app/shared/services/register-data.service';
 
@@ -12,21 +13,27 @@ import { RegisterDataService } from 'src/app/shared/services/register-data.servi
 export class BookingSearchComponent implements OnInit {
 
   date: Date = new Date();
-  searchDate: any=null;
+  searchDate: any = null;
   dataVisible: boolean = false;
   RegisterData: RegisterEntity[] = [];
   searchedData: RegisterEntity[] = [];
   pipe = new DatePipe('en-US')
 
-  constructor(private service: RegisterDataService, public _router: Router) {
-
-  }
+  constructor(private service: RegisterDataService, public _router: Router) { }
 
   ngOnInit(): void {
     this.service.getData().subscribe((response) => {
       this.RegisterData = response;
       console.log(response);
     })
+  }
+
+  conatactConvert(contacts: any): string {
+    let container:string[] = [];
+    contacts.forEach(x => {
+      container.push(x.number);
+    })
+    return container.join(', ');
   }
 
   clearSearchDate() {

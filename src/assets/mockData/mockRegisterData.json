@@ -2,9 +2,9 @@
     "id": 1,
     "customerName": "Ede",
     "contactNumber": [
-      "270-203-5241",
-      "125-909-2409",
-      "262-663-2792"
+      {"contactNumber":"270-203-5241"},
+      {"contactNumber":"125-909-2409"},
+      {"contactNumber":"262-663-2792"}
     ],
     "bookingDate": "2021-03-30 18:42:33",
     "timeFrom": "6:38 AM",

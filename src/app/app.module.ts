@@ -12,6 +12,7 @@ import { NavbarComponent } from './shared/modules/navbar/navbar.component';
 import { BookingComponent } from './feature/booking/booking.component';
 import { BookingSearchComponent } from './feature/booking/booking-search/booking-search.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [RegisterDataService],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
 export class ContactModel
 {
-    public contact:string;
+    public number:string;
 }

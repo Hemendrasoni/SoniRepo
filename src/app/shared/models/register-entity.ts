@@ -1,9 +1,10 @@
+import { ContactModel } from './contact_model';
 import { CustomerModel } from './customer_model';
 
 export class RegisterEntity {
        id: number;
        customerName:string;
-       contactNumber : string[];
+       contact : ContactModel[];
        bookingDate : Date;
        timeFrom: string;
        timeTo : string;

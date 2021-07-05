@@ -20,6 +20,7 @@ export class BookingComponent implements OnInit {
   booking_obj: RegisterEntity;
   customer_obj: CustomerModel;
   contact_obj: ContactModel;
+  phoneNumber: ContactModel;
   submitted = false;
   fromTime: Date = new Date();
   toTime: Date = new Date();
@@ -43,11 +44,9 @@ export class BookingComponent implements OnInit {
     'Ghodi',
   ];
 
-
-
   constructor(private formBuilder: FormBuilder, public route: ActivatedRoute, public _router: Router, public _restCall: RegisterDataService, public notify: NotificationService) {
     this.editData = this._router.getCurrentNavigation().extras.state?.captureData;
-    console.log(this.editData)
+    console.log(this.editData);
   }
 
   get f() { return this.bookingForm.controls; }
@@ -93,9 +92,10 @@ export class BookingComponent implements OnInit {
   }
 
   addContact() {
+    this.phoneNumber =new ContactModel();
     if (this.bookingForm.get('contact').value && !this.contact.includes(this.bookingForm.get('contact').value)) {
-      this.contact_obj.number = this.bookingForm.get('contact').value;
-      this.contact.push(this.contact_obj);
+      this.phoneNumber.number = this.bookingForm.get('contact').value;
+      this.contact.push(this.phoneNumber);
       this.bookingForm.get('contact').setValue('');
     }
   }
@@ -117,7 +117,8 @@ export class BookingComponent implements OnInit {
     this._restCall.saveData(<RegisterEntity>this.bookingForm.value).subscribe((res) => {
       this.notify.showSuccess("Data Saved Successfully!!", "Thanks for Booking!")
     })
-    // this.bookingForm.reset();
+    this.bookingForm.reset();
+    this._router.navigateByUrl("/booking-search");
   }
 
 

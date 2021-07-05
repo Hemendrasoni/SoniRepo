@@ -13,16 +13,20 @@ import { BookingComponent } from './feature/booking/booking.component';
 import { BookingSearchComponent } from './feature/booking/booking-search/booking-search.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { ToastrModule } from 'ngx-toastr';
+import { BookingSummaryComponent } from './feature/booking/booking-summary/booking-summary.component';
+import { MatModuleRepositoryModule } from './shared/modules/mat-module-repository/mat-module-repository.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     BookingComponent,
-    BookingSearchComponent
+    BookingSearchComponent,
+    BookingSummaryComponent
   ],
   imports: [
     BrowserAnimationsModule,
+    MatModuleRepositoryModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     TypeaheadModule.forRoot(),

@@ -1,0 +1,81 @@
+<div class="container">
+
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th style="text-align: center;" scope="col">Booking Id</th>
+            <th style="text-align: center;" scope="col">Customer Name</th>
+            <th style="text-align: center;" scope="col">Venue</th>
+            <th style="text-align: center;" scope="col">Booking Date</th>
+            <th style="text-align: center;" scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of dataSource;i as index">
+            <th style="text-align: center;" scope="row">{{data.id}}</th>
+            <td style="text-align: center;">{{data.name}}</td>
+            <td style="text-align: center;">{{data.venue}}</td>
+            <td style="text-align: center;">{{data.bookingDate | date}}</td>
+            <td style="text-align: center;">
+                <button class="btn-style" mat-fab color="primary" (click)="editForm(data.id)">
+                    <mat-icon style="height: 30px;width: 30px;" ><i class="fas fa-edit"></i></mat-icon>
+                </button>&nbsp;&nbsp;
+                <button class="btn-style" mat-fab color="accent" (click)="viewData(data.id)">
+                    <mat-icon style="height: 30px;width: 30px;" ><i class="fas fa-eye"></i></mat-icon>
+                </button>&nbsp;&nbsp;
+                <button class="btn-style" mat-fab color="warn" (click)="deleteData(data.id)">
+                    <mat-icon style="height: 30px;width: 30px;" ><i class="fas fa-trash"></i></mat-icon>
+                </button>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+
+    <div class="py-2">
+        <div class="py-3" *ngFor="let data of searchedData;let i=index">
+          <div class="card one-edge-shadow" >
+            <div class="d-flex justify-content-between card-header header text-white" >
+              <span>
+                D.O.B: {{data.bookingDate | date}}
+              </span>
+              <span>
+                <p class="god_text">
+                  " जय माता दी "</p>
+              </span>
+              <span>Booking Id: <b>{{data.id}}</b>
+              </span>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title ">{{data.venueAddress}}</h5>
+              <p class="card-text">~ {{data.localAddress}}</p>
+              <hr style="border: 1px solid #ff5821;">
+              <div>
+                <p><b>Items:</b>{{data.items}}</p>
+                <section class="d-flex justify-content-between">
+                  <span><b>Contact Number:</b> {{conatactConvert(data.contact)}}</span>
+                  <span><b>Customer Name:</b> {{data.customerName}}</span>
+                </section>
+              </div>
+              <hr style="border: 1px solid #ff5821;">
+              <div class="row">
+                <div class="col-lg-6">
+                  <span><b>Note: </b>{{data.note}}</span>
+                </div>
+                <div class="col-lg-6">
+                  <section class="d-flex align-items-end flex-column ">
+                    <p><b>Ammount:</b> {{data.bill_amnt}}/-</p>
+                    <p><b>Advance:</b> {{data.adv_amnt}}/-</p>
+                    <p><b>Remaining:</b> {{data.remaining_amnt}}/-</p>
+                  </section>
+                </div>
+              </div>
+<!--       
+              <hr style="border: 1px solid #ff5821;">
+              <span  (click)="editForm(data)" class="btn  btn btn-outline-success float-right">Edit Booking</span>
+              <span  class="btn btn-outline-primary float-right mr-2">Booking Details</span> -->
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
